@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, } from "react-native";
 import CategoriesScreen from "./CategoriesScreen";
 
 const CategoryRecipeScreen = (props) => {
+ const catId = props.navigation.getParam('categoryId')
   return (
     <View style={styles.screen}>
       <Text>The category recipe screen !</Text>
