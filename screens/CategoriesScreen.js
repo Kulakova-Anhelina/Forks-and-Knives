@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Button, FlatList, Image } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import Colors from "../constants/Colors";
+import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 
 const CategoriesScreen = (props) => {
   console.log(props);
@@ -25,13 +24,11 @@ const CategoriesScreen = (props) => {
           props.navigation.navigate({
             routeName: "CategoryRecipe",
             //use data in new screen
-            params: {
-              categoryId: category.item.idCategory,
-            },
+            params: { categoryId: item.strCategory },
           })
         }
       >
-        <View>
+        <View style={{ ...styles.container, ...{ backgroundColor: "white" } }}>
           <View>
             <Image
               style={{ width: 150, height: 100 }}
@@ -47,15 +44,17 @@ const CategoriesScreen = (props) => {
   };
 
   return (
-    <View style={styles.screen}>
-      <Text>What would you like?</Text>
-      <FlatList
-        data={category}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.idCategory}
-        numColumns={2}
-      />
-    </View>
+    <ScrollView>
+      <View style={styles.screen}>
+        <Text>What would you like?</Text>
+        <FlatList
+          data={category}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.idCategory}
+          numColumns={2}
+        />
+      </View>
+    </ScrollView>
   );
 };
 
@@ -64,7 +63,6 @@ CategoriesScreen.navigationOptions = {
   // headerStyle: {
   //   backgroundColor: Colors.backColor
   // },
-  headerTintColor: Colors.buttonColor,
 };
 const styles = StyleSheet.create({
   screen: {
@@ -76,6 +74,13 @@ const styles = StyleSheet.create({
   gridStyle: {
     margin: 20,
     height: 150,
+  },
+  container: {
+    flex: 1,
+    borderRadius: 20,
+    alignContent: "center",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 export default CategoriesScreen;

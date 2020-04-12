@@ -5,19 +5,27 @@ import { createStackNavigator } from "react-navigation-stack";
 import CategoriesScreen from "../screens/CategoriesScreen";
 import CategoryRecipeScreen from "../screens/CategoryRecipeScreen";
 import RecipeDetails from "../screens/RecipeDetailsScreen";
+import Colors from "../constants/Colors";
 
-const AppNavigator = createStackNavigator({
-  //mapping to the screens from folder screens
-  Categories: {
-    screen: CategoriesScreen
+const AppNavigator = createStackNavigator(
+  {
+    //mapping to the screens from folder screens
+    Categories: {
+      screen: CategoriesScreen,
+    },
+    CategoryRecipe: {
+      screen: CategoryRecipeScreen,
+    },
+    Recipe: {
+      screen: RecipeDetails,
+    },
   },
-  CategoryRecipe: {
-    screen: CategoryRecipeScreen
-  },
-  Recipe: {
-    screen: RecipeDetails
+  { //deault card
+    mode:'modal',
+    defaultNavigationOptions: {
+      headerTintColor: Colors.buttonColor,
+    },
   }
-});
+);
 
-
-export default createAppContainer(AppNavigator)
+export default createAppContainer(AppNavigator);

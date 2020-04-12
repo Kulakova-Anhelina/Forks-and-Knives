@@ -3,6 +3,10 @@ import { StyleSheet, Text, View } from "react-native";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import RecipeNavigation from "./navigation/RecipeNavigation";
+import {enableScreens} from 'react-native-screens';
+
+// for better perfomence, difference is not visible
+enableScreens()
 
 const customFonts = () => {
   Font.loadAsync({
