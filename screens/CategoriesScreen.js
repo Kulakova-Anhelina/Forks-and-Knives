@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Button, FlatList, Image } from "react-native";
+import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
+import SearchRecipe from "../components/SearchRecipe";
 
 const CategoriesScreen = (props) => {
   console.log(props);
@@ -27,6 +28,7 @@ const CategoriesScreen = (props) => {
             params: { categoryId: item.strCategory },
           })
         }
+  
       >
         <View style={{ ...styles.container, ...{ backgroundColor: "white" } }}>
           <View>
@@ -40,13 +42,15 @@ const CategoriesScreen = (props) => {
           </View>
         </View>
       </TouchableOpacity>
+
     );
   };
 
   return (
     <ScrollView>
       <View style={styles.screen}>
-        <Text>What would you like?</Text>
+        <Text style={styles.text}>What would you like to cook today?</Text>
+        <SearchRecipe />
         <FlatList
           data={category}
           renderItem={renderItem}
@@ -72,8 +76,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   gridStyle: {
-    margin: 20,
+    margin: 10,
     height: 150,
+    shadowColor: "black",
+    shadowOpacity: 0.15,
+    shadowOffset: { width: 0, height: 1 },
+    shadowRadius: 5,
   },
   container: {
     flex: 1,
@@ -81,6 +89,11 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
     alignItems: "center",
+  },
+  text: {
+    fontFamily: "roboto-bold",
+    fontSize: 18,
+    padding: 10,
   },
 });
 export default CategoriesScreen;
