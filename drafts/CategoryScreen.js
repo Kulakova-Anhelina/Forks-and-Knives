@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import SearchRecipe from "../components/SearchRecipe";
-import Food from "../drafts/Food";
+import FoodScreen from "../drafts/Food"
 
 const CategoriesScreen = (props) => {
   console.log(props);
-  const url = "https://www.themealdb.com/api/json/v1/1/categories.php";
+  const url = "https://www.themealdb.com/api/json/v2/9973533/latest.php";
   const [category, setCategory] = useState("");
 
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
       .then((responseData) => {
-        setCategory(responseData.categories);
+        setCategory(responseData.meals);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -26,21 +26,19 @@ const CategoriesScreen = (props) => {
           props.navigation.navigate({
             routeName: "CategoryRecipe",
             //use data in new screen
-            params: { categoryId: item.strCategory },
+            params: { categoryId: item.strMeal },
           })
         }
       >
         <View style={{ ...styles.container, ...{ backgroundColor: "white" } }}>
           <View>
             <Image
-              style={{ width: 200, height: 100 }}
-              source={{ uri: item.strCategoryThumb }}
+              style={{ width: 150, height: 100 }}
+              source={{ uri: item.strMealThumb }}
             />
           </View>
-          <View>
-            <Text numberOfLines={2} style={{ fontSize: 12 }}>
-              {item.strCategory}
-            </Text>
+          <View >
+            <Text numberOfLines={2} style = {{fontSize: 10}}>{item.strMeal}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -49,31 +47,30 @@ const CategoriesScreen = (props) => {
 
   return (
     <ScrollView>
-   
       <View style={styles.screen}>
-        <Text style={styles.title}>WHAT WOULD YOU LIKE TO COOK ?</Text>
+        <Text style={styles.title}>What would you like to cook ?</Text>
         <SearchRecipe />
         <View>
-          <Image
-            style={{ width: 350, height: 150 }}
-            source={require("../images/10-Kitchen-Ingredients-That-Work-Like-Medicines.jpg")}
-          />
+            <Image
+              style={{ width: 350, height: 150}}
+              source={require('../images/10-Kitchen-Ingredients-That-Work-Like-Medicines.jpg')}
+            />
+          
+          </View>
+        <View>
+        <Text style = {styles.title}>10 LATEST RECIPES</Text>
         </View>
-     
-          <Text style={styles.title}>10 LATEST RECIPES</Text>
-          <Food/>
-        
-        <Text style={styles.title}>LEARN TO COOK</Text>
         <FlatList
           data={category}
           renderItem={renderItem}
-          keyExtractor={(item) => item.idCategory}
-          numColumns={1}
+          keyExtractor={(item) => item.idMeal}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled={true}
         />
-       
-      
+        <Text text = {styles.title}>LEARN TO COOK</Text>
+        <FoodScreen/>
       </View>
-
     </ScrollView>
   );
 };
@@ -87,14 +84,13 @@ CategoriesScreen.navigationOptions = {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignContent: "center",
     alignItems: "center",
   },
   gridStyle: {
     margin: 10,
     height: 150,
-    width:350,
     shadowColor: "black",
     shadowOpacity: 0.15,
     shadowOffset: { width: 0, height: 1 },
@@ -103,16 +99,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     borderRadius: 10,
-    alignContent: "center",
-    justifyContent: "center",
+    alignContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center",
   },
   title: {
     fontFamily: "roboto-bold",
     fontSize: 18,
     padding: 10,
-    margin: 5
   },
-  text: { fontSize: 10 },
+  text: {fontSize: 2},
 });
 export default CategoriesScreen;

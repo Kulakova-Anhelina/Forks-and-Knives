@@ -7,6 +7,7 @@ import CategoryRecipeScreen from "../screens/CategoryRecipeScreen";
 import RecipeDetails from "../screens/RecipeDetailsScreen";
 import Colors from "../constants/Colors";
 
+
 const AppNavigator = createStackNavigator(
   {
     //mapping to the screens from folder screens
@@ -19,9 +20,11 @@ const AppNavigator = createStackNavigator(
     Recipe: {
       screen: RecipeDetails,
     },
+  
   },
-  { //deault card
-    mode:'modal',
+  {
+    //deault card
+    mode: "modal",
     defaultNavigationOptions: {
       headerTintColor: Colors.buttonColor,
     },
