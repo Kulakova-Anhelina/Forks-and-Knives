@@ -28,7 +28,7 @@ const CategoryRecipeScreen = (props) => {
           props.navigation.navigate({
             routeName: "Recipe",
             //use data in new screen
-            params: { categoryId: item.strMeal },
+            params: { recipeId: item.strMeal },
           })
         }
       >
