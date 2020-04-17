@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
-import SearchRecipe from "../components/SearchRecipe";
-import Food from "../components/Food";
 
-const CategoriesScreen = (props) => {
+const Category= (props) => {
   console.log(props);
   const url = "https://www.themealdb.com/api/json/v1/1/categories.php";
   const [category, setCategory] = useState("");
@@ -22,13 +20,7 @@ const CategoriesScreen = (props) => {
     return (
       <TouchableOpacity
         style={styles.gridStyle}
-        onPress={() =>
-          props.navigation.navigate({
-            routeName: "CategoryRecipe",
-            //use data in new screen
-            params: { categoryId: item.strCategory },
-          })
-        }
+        onPress={props.onSelect}
       >
         <View style={{ ...styles.container, ...{ backgroundColor: "white" } }}>
           <View>
@@ -48,27 +40,9 @@ const CategoriesScreen = (props) => {
   };
 
   return (
-    <ScrollView>
-      <View style={styles.screen}>
-        <Text style={styles.title}>WHAT WOULD YOU LIKE TO COOK ?</Text>
-        <SearchRecipe />
-        <View>
-          <Image
-            style={{ width: 350, height: 150 }}
-            source={require("../images/10-Kitchen-Ingredients-That-Work-Like-Medicines.jpg")}
-          />
-        </View>
 
-        <Text style={styles.title}>10 LATEST RECIPES</Text>
-        <Food />
 
-        <Text style={styles.title}>LEARN TO COOK</Text>
-        <View>
-          <Image
-            style={{ width: 350, height: 150 }}
-            source={require("../images/imag2.gif")}
-          />
-        </View>
+       
 
         <FlatList
           data={category}
@@ -76,24 +50,13 @@ const CategoriesScreen = (props) => {
           keyExtractor={(item) => item.idCategory}
           numColumns={2}
         />
-      </View>
-    </ScrollView>
+
   );
 };
 
-CategoriesScreen.navigationOptions = {
-  headerTitle: "Forks and Knives",
-  // headerStyle: {
-  //   backgroundColor: Colors.backColor
-  // },
-};
+
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-  },
+
   gridStyle: {
     margin: 10,
     height: 150,
@@ -110,12 +73,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  title: {
-    fontFamily: "roboto-bold",
-    fontSize: 18,
-    padding: 10,
-    margin: 5,
-  },
   text: { fontSize: 10 },
 });
-export default CategoriesScreen;
+export default Category;

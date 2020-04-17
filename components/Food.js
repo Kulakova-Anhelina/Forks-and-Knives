@@ -19,7 +19,6 @@ const Food = (props) => {
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity style={styles.gridStyle}>
-  
         <View style={styles.container}>
           <View>
             <Image
@@ -32,6 +31,7 @@ const Food = (props) => {
               {item.strMeal}
             </Text>
           </View>
+          <View></View>
         </View>
       </TouchableOpacity>
     );
@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowOffset: { width: 0, height: 1 },
     shadowRadius: 2,
-
   },
   container: {
     flex: 1,
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   text: { fontSize: 2 },
 });
