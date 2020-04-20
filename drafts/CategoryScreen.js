@@ -1,113 +1,87 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList, Image } from "react-native";
-import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
-import SearchRecipe from "../components/SearchRecipe";
-import FoodScreen from "../drafts/Food"
+import React, {useState} from "react";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions,
+  ScrollView,
+} from "react-native";
+const { width } = Dimensions.get("screen");
+const height = (width * 100) / 150;
 
-const CategoriesScreen = (props) => {
-  console.log(props);
-  const url = "https://www.themealdb.com/api/json/v2/9973533/latest.php";
-  const [category, setCategory] = useState("");
 
-  useEffect(() => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((responseData) => {
-        setCategory(responseData.meals);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+const images = [
+  "https://images.unsplash.com/photo-1521931206836-2265cd656a5c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1054&q=80",
+  "https://images.unsplash.com/photo-1465808883813-7d2959af2252?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+  "https://images.unsplash.com/photo-1549590143-d5855148a9d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80",
+];
 
-  const renderItem = ({ item }) => {
-    return (
-      <TouchableOpacity
-        style={styles.gridStyle}
-        onPress={() =>
-          props.navigation.navigate({
-            routeName: "CategoryRecipe",
-            //use data in new screen
-            params: { categoryId: item.strMeal },
-          })
-        }
-      >
-        <View style={{ ...styles.container, ...{ backgroundColor: "white" } }}>
-          <View>
-            <Image
-              style={{ width: 150, height: 100 }}
-              source={{ uri: item.strMealThumb }}
-            />
-          </View>
-          <View >
-            <Text numberOfLines={2} style = {{fontSize: 10}}>{item.strMeal}</Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
-  };
+const Example = () => {
+
+const [state, setState] = useState(0)
+const change = (nativeEvent) =>{
+ const slide =Math.round(nativeEvent.contentOffset / nativeEvent.layout) 
+ if(slide !== state){
+   setState(slide)
+ }
+
+}
 
   return (
-    <ScrollView>
-      <View style={styles.screen}>
-        <Text style={styles.title}>What would you like to cook ?</Text>
-        <SearchRecipe />
-        <View>
-            <Image
-              style={{ width: 350, height: 150}}
-              source={require('../images/10-Kitchen-Ingredients-That-Work-Like-Medicines.jpg')}
-            />
-          
-          </View>
-        <View>
-        <Text style = {styles.title}>10 LATEST RECIPES</Text>
-        </View>
-        <FlatList
-          data={category}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.idMeal}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          pagingEnabled={true}
-        />
-        <Text text = {styles.title}>LEARN TO COOK</Text>
-        <FoodScreen/>
+    <View style={styles.container}>
+      <ScrollView
+        horizontal
+        onScroll = {change}
+        scrollEventThrottle={16}
+        pagingEnabled
+        showsVerticalScrollIndicator={false}
+        style={styles.scroll}
+      >
+        {images.map((image, index) => (
+          <Image key={index} style={styles.image} source={{ uri: image }} />
+        ))}
+      </ScrollView>
+      <View style = {styles.pagination}>
+        {images.map((i, k) => (
+          <Text 
+          key = {i}
+          style={k===state ? styles.paginationText : styles.paginationActive}> ⬤ </Text>
+        ))}
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
-CategoriesScreen.navigationOptions = {
-  headerTitle: "Recipe categories",
-  // headerStyle: {
-  //   backgroundColor: Colors.backColor
-  // },
-};
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "space-evenly",
-    alignContent: "center",
-    alignItems: "center",
-  },
-  gridStyle: {
-    margin: 10,
-    height: 150,
-    shadowColor: "black",
-    shadowOpacity: 0.15,
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 5,
-  },
   container: {
+    marginTop: 5,
+    width,
+    height,
+  },
+  scroll: { width, height },
+  image: {
+    width,
+    height,
+    resizeMode: "cover",
+  },
+  pagination: {
     flex: 1,
-    borderRadius: 10,
-    alignContent: "space-between",
-    justifyContent: "space-around",
-    alignItems: "center",
+    flexDirection: "row",
+    position: "absolute",
+    bottom: 0,
+     alignSelf: 'center'
+    
   },
-  title: {
-    fontFamily: "roboto-bold",
-    fontSize: 18,
-    padding: 10,
+  paginationText: {
+    color: "#888",
+    margin: 5,
+
   },
-  text: {fontSize: 2},
+  paginationActive: {
+    color: "white",
+    margin: 5,
+  }
 });
-export default CategoriesScreen;
+
+export default Example;

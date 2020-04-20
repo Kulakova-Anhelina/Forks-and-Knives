@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import SearchRecipe from "../components/SearchRecipe";
 import Food from "../components/Food";
+import Example from "../components/Example";
 
 const CategoriesScreen = (props) => {
   console.log(props);
@@ -64,10 +65,9 @@ const CategoriesScreen = (props) => {
 
         <Text style={styles.title}>LEARN TO COOK</Text>
         <View>
-          <Image
-            style={{ width: 350, height: 150 }}
-            source={require("../images/imag2.gif")}
-          />
+        <View>
+        <Example />
+      </View>
         </View>
 
         <FlatList
@@ -77,6 +77,7 @@ const CategoriesScreen = (props) => {
           numColumns={2}
         />
       </View>
+  
     </ScrollView>
   );
 };
