@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 
-const Category= (props) => {
+const Category = (props) => {
   console.log(props);
   const url = "https://www.themealdb.com/api/json/v1/1/categories.php";
   const [category, setCategory] = useState("");
@@ -18,10 +18,7 @@ const Category= (props) => {
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity
-        style={styles.gridStyle}
-        onPress={props.onSelect}
-      >
+      <TouchableOpacity style={styles.gridStyle} onPress={props.onSelect}>
         <View style={{ ...styles.container, ...{ backgroundColor: "white" } }}>
           <View>
             <Image
@@ -40,23 +37,16 @@ const Category= (props) => {
   };
 
   return (
-
-
-       
-
-        <FlatList
-          data={category}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.idCategory}
-          numColumns={2}
-        />
-
+    <FlatList
+      data={category}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.idCategory}
+      numColumns={2}
+    />
   );
 };
 
-
 const styles = StyleSheet.create({
-
   gridStyle: {
     margin: 10,
     height: 150,

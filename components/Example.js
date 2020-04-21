@@ -7,10 +7,11 @@ import {
   Dimensions,
 } from 'react-native';
 
+import Carousel from 'react-native-carousel-view';
 
 const { width } = Dimensions.get("screen");
 const height = (width * 100) / 150;
-import Carousel from 'react-native-carousel-view';
+
 
 export default function Example() {
 
@@ -44,17 +45,21 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 15
+
   },
   contentContainer: {
-    borderWidth: 2,
-    borderColor: '#CCC',
+  
+
     justifyContent: 'center',
     alignItems: 'center',
+ 
   },
   image: {
     width,
     height,
     resizeMode: "cover",
+  
   }
 });
 

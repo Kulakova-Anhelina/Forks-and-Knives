@@ -60,16 +60,17 @@ const CategoriesScreen = (props) => {
           />
         </View>
 
-        <Text style={styles.title}>10 LATEST RECIPES</Text>
+        <Text style={styles.title}>INSPIRATION JUST FOR YOU</Text>
         <Food />
-
-        <Text style={styles.title}>LEARN TO COOK</Text>
+     
         <View>
+     
         <View>
+   
         <Example />
       </View>
         </View>
-
+        <Text style={styles.title}> FEATURED COLLECTION</Text>
         <FlatList
           data={category}
           renderItem={renderItem}
