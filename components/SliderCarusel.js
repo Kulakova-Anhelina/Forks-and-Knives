@@ -13,7 +13,7 @@ const { width } = Dimensions.get("screen");
 const height = (width * 100) / 150;
 
 
-export default function Example() {
+export default function SliderCarusel() {
 
  
     return (
@@ -22,7 +22,7 @@ export default function Example() {
           <Carousel
             width={width}
             height={height}
-            delay={4000}
+            delay={6000}
             indicatorSize={20}
             indicatorColor="white"
             >
