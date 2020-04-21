@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList, Image} from "react-native";
+import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
-import { Button,Card,Icon } from 'react-native-elements';
+import { Button, Card, Icon } from "react-native-elements";
 
 const CategoryRecipeScreen = (props) => {
   const catId = props.navigation.getParam("categoryId");
@@ -20,42 +20,48 @@ const CategoryRecipeScreen = (props) => {
 
   const renderItem = ({ item }) => {
     return (
-      <Card
-      containerStyle = {{}}>
-      <TouchableOpacity
-     
-        onPress={() =>
-          props.navigation.navigate({
-            routeName: "Recipe",
-            //use data in new screen
-            params: { recipeId: item.strMeal },
-          })
-        }
-      >
-        <View style={{ ...styles.container, ...{ backgroundColor: "white" } }}>
-          <View>
-            <Image
-              style={styles.cardImage}
-              source={{ uri: item.strMealThumb }}
+      <Card>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate({
+              routeName: "Recipe",
+              //use data in new screen
+              params: { recipeId: item.strMeal },
+            })
+          }
+        >
+          <View
+            style={{ ...styles.container, ...{ backgroundColor: "white" } }}
+          >
+            <View>
+              <Image
+                style={styles.cardImage}
+                source={{ uri: item.strMealThumb }}
+              />
+            </View>
+            <View>
+              <Text numberOfLines={2} style={styles.title}>
+                {item.strMeal}
+              </Text>
+              <View style={styles.mealRow}>
+                <Text>{item.strArea}</Text>
+              </View>
+              <View style={styles.mealRow}>
+                <Text>{item.strCategory}</Text>
+              </View>
+            </View>
+            <Button
+              icon={<Icon name="code" color="#ffffff" />}
+              buttonStyle={{
+                borderRadius: 0,
+                marginLeft: 0,
+                marginRight: 0,
+                marginBottom: 0,
+              }}
+              title="VIEW NOW"
             />
           </View>
-          <View>
-            <Text numberOfLines={2} style={styles.title}>
-              {item.strMeal}
-            </Text>
-          </View>
-          <Button
-            icon={<Icon name="code" color="#ffffff" />}
-            buttonStyle={{
-              borderRadius: 0,
-              marginLeft: 0,
-              marginRight: 0,
-              marginBottom: 0,
-            }}
-            title="VIEW NOW"
-          />
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
       </Card>
     );
   };
@@ -102,14 +108,15 @@ const styles = StyleSheet.create({
     fontFamily: "roboto-bold",
     fontSize: 18,
     padding: 10,
-    marginBottom: 10 
+    marginBottom: 10,
   },
-  text: { fontSize: 14,
-  marginBottom: 10 },
+  text: { fontSize: 14, marginBottom: 10 },
   cardImage: {
-    resizeMode: 'cover',
-    width: 300, 
-    height: 100
-  }
+    resizeMode: "cover",
+    width: 300,
+    height: 100,
+  },
+
+ 
 });
 export default CategoryRecipeScreen;

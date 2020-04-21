@@ -41,9 +41,9 @@ const RecipeDetailsScreen = (props) => {
         <View style={{ flex: 1 }}>
           <WebView
             style={{ marginTop: 20 , width: 350,height: 200}}
-            javaScriptEnabled={true}
-            domStorageEnabled={true}
             source={{ uri: dish.video }}
+          
+         
           />
         </View>
         <Button

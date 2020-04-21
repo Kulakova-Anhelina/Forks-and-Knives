@@ -5,7 +5,6 @@ import { createStackNavigator } from "react-navigation-stack";
 import CategoriesScreen from "../screens/CategoriesScreen";
 import CategoryRecipeScreen from "../screens/CategoryRecipeScreen";
 import RecipeDetails from "../screens/RecipeDetailsScreen";
-import SearchBy from "../screens/SearchBy";
 import Colors from "../constants/Colors";
 
 
@@ -20,10 +19,6 @@ const AppNavigator = createStackNavigator(
     },
     Recipe: {
       screen: RecipeDetails,
-    },
-
-    SearchScreen: {
-      screen : SearchBy
     }
   
   },

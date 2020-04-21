@@ -13,7 +13,6 @@ import Example from "../components/SliderCarusel";
 import Colors from "../constants/Colors";
 import { Button } from "react-native-elements";
 
-
 const CategoriesScreen = (props) => {
   console.log(props);
   const url = "https://www.themealdb.com/api/json/v1/1/categories.php";
@@ -71,23 +70,23 @@ const CategoriesScreen = (props) => {
         </View>
         <View style={styles.inputContainer}>
           <TextInput
-            style={{ ...styles.input, ...{ fontSize: 20} }}
+            style={{ ...styles.input, ...{ fontSize: 20 } }}
             onChangeText={(text) => setSearchItem(text)}
             value={searchItem}
             placeholder="Search"
           />
-          <Button 
-          title="GO" 
-          type="outline"
-          buttonStyle = {{borderColor: Colors.buttonColor}}
-          titleStyle = {{color: Colors.buttonColor}}
-          onPress={() =>
-          props.navigation.navigate({
-            routeName: "SearchScreen",
-            params: { keyword: searchItem },
-          })
-        }
-        
+          <Button
+            title="GO"
+            type="outline"
+            buttonStyle={{ borderColor: Colors.buttonColor }}
+            titleStyle={{ color: Colors.buttonColor }}
+            onPress={() =>
+              props.navigation.navigate({
+                routeName: "CategoryRecipe",
+                //use data in new screen
+                params: { categoryId: searchItem },
+              })
+            }
           />
         </View>
         <Text style={styles.title}>INSPIRATION JUST FOR YOU</Text>
