@@ -1,39 +1,62 @@
-import React, { useState} from 'react';
+import React from 'react';
 import {
-  Text,
+  StyleSheet,
   View,
+  AppRegistry,
+  Image,
   Dimensions,
 } from 'react-native';
-import Carousel from 'react-native-looped-carousel';
 
-const { width, height } = Dimensions.get('window');
 
-const  Example =() =>  {
+const { width } = Dimensions.get("screen");
+const height = (width * 100) / 150;
+import Carousel from 'react-native-carousel-view';
 
-const [size, setSize] = useState({
-  width: width,
-  hight: height
-})
+export default function Example() {
 
- const onLayoutDidChange = (e) => {
-    const layout = e.nativeEvent.layout;
-    setSize({ size: { width: layout.width, height: layout.height } });
-  }
-
+ 
     return (
-      <View style={{ flex: 1 }} onLayout={onLayoutDidChange}>
-        <Carousel
-          delay={2000}
-          style={}
-          autoplay
-          pageInfo
-          onAnimateNextPage={(p) => console.log(p)}
-        >
-          <View style={[{ backgroundColor: '#BADA55' , width = {size.width}}]}><Text>1</Text></View>
-          <View style={[{ backgroundColor: 'red' },] }><Text>2</Text></View>
-          <View style={[{ backgroundColor: 'blue' }, ]}><Text>3</Text></View>
-        </Carousel>
-      </View>
+  
+        <View style={styles.container}>
+          <Carousel
+            width={width}
+            height={height}
+            delay={4000}
+            indicatorSize={20}
+            indicatorColor="white"
+            >
+            <View style={styles.contentContainer}>
+             <Image style={styles.image} source={{uri: "https://images.unsplash.com/photo-1521931206836-2265cd656a5c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1054&q=80"} }/>
+            </View>
+            <View style={styles.contentContainer}>
+            <Image style={styles.image} source={{uri: "https://images.unsplash.com/photo-1465808883813-7d2959af2252?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"} }/>
+            </View>
+            <View style={styles.contentContainer}>
+            <Image style={styles.image} source={{uri: "https://images.unsplash.com/photo-1549590143-d5855148a9d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"} }/>
+            </View>
+          </Carousel>
+        </View>
     );
   }
-export default Example;
+
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contentContainer: {
+    borderWidth: 2,
+    borderColor: '#CCC',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width,
+    height,
+    resizeMode: "cover",
+  }
+});
+
+
+AppRegistry.registerComponent('example', () => example)
