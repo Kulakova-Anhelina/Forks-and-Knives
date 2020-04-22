@@ -14,4 +14,9 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
+
+
+FavoriteRecipeScreen.navigationOptions = {
+  headerTitle: "My recipe book"
+}
 export default FavoriteRecipeScreen;

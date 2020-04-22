@@ -90,7 +90,7 @@ const CategoriesScreen = (props) => {
           />
         </View>
         <Text style={styles.title}>INSPIRATION JUST FOR YOU</Text>
-        <Food />
+        <Food navigation={props.navigation} />
 
         <View>
           <View>
@@ -110,7 +110,7 @@ const CategoriesScreen = (props) => {
 };
 
 CategoriesScreen.navigationOptions = {
-  headerTitle: "Forks and Knives",
+  headerTitle: "Forks&Knives",
   // headerStyle: {
   //   backgroundColor: Colors.backColor
   // },
