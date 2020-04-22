@@ -6,8 +6,6 @@ import Colors from "../constants/Colors";
 
 const FiltersScreen = (props) => {
   const { navigation } = props;
-
-  const [isChinese, setIsChinese] = useState(false);
   const [isMeat, setMeat] = useState(false);
   const [isVegan, setVegan] = useState(false);
   const [isCanadian, setIsCanadian] = useState(false);
