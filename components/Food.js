@@ -18,16 +18,16 @@ const Food = (props) => {
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity 
-       onPress={() => {
+      <TouchableOpacity
+        onPress={() => {
           props.navigation.navigate({
             routeName: "Recipe",
             //use data in new screen
             params: { recipeId: item.strMeal },
           });
         }}
-      
-      style={styles.gridStyle}>
+        style={styles.gridStyle}
+      >
         <View style={styles.container}>
           <View>
             <Image
@@ -36,7 +36,7 @@ const Food = (props) => {
             />
           </View>
           <View>
-            <Text numberOfLines={2} style={{ fontSize: 10 }}>
+            <Text numberOfLines={2} style={styles.text}>
               {item.strMeal}
             </Text>
           </View>
@@ -55,7 +55,6 @@ const Food = (props) => {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         pagingEnabled={true}
-       
       />
     </View>
   );
@@ -78,6 +77,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
   },
-  text: { fontSize: 2 },
+  text: { fontSize: 10, fontFamily: "roboto" },
 });
 export default Food;

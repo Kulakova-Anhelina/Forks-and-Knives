@@ -45,13 +45,13 @@ const CategoryRecipeScreen = (props) => {
               </Text>
               <View style={styles.row}>
                 <View style={styles.mealRow}>
-                  <Text>{item.strArea.toUpperCase()}</Text>
+                  <Text style = {styles.text}>{item.strArea.toUpperCase()}</Text>
                 </View>
                 <View style={styles.mealRow}>
-                  <Text>{item.strCategory.toUpperCase()}</Text>
+                  <Text  style = {styles.text}>{item.strCategory.toUpperCase()}</Text>
                 </View>
                 <View style={styles.mealRow}>
-                  <Text>{item.strTags === null ? item.strCategory.toUpperCase() : item.strTags.toUpperCase()  }</Text>
+                  <Text style = {styles.text}>{item.strTags === null ? item.strCategory.toUpperCase() : item.strTags.toUpperCase()  }</Text>
                 </View>
               </View>
             </View>
@@ -109,6 +109,9 @@ const styles = StyleSheet.create({
   },
   mealRow: {
     
+  },
+  text :{
+    fontFamily: 'roboto'
   }
  
 });

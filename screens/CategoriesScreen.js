@@ -12,6 +12,9 @@ import Food from "../components/Food";
 import Example from "../components/SliderCarusel";
 import Colors from "../constants/Colors";
 import { Button } from "react-native-elements";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import HeaderButton from "../components/HeaderButton";
+import { Ionicons } from "@expo/vector-icons";
 
 const CategoriesScreen = (props) => {
   console.log(props);
@@ -109,11 +112,21 @@ const CategoriesScreen = (props) => {
   );
 };
 
-CategoriesScreen.navigationOptions = {
-  headerTitle: "Forks&Knives",
-  // headerStyle: {
-  //   backgroundColor: Colors.backColor
-  // },
+CategoriesScreen.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Forks&Knives",
+    headerLeft: (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Menu"
+          iconName="ios-menu"
+          onPress={() => {
+            navData.navigation.toggleDrawer();
+          }}
+        />
+      </HeaderButtons>
+    ),
+  };
 };
 const styles = StyleSheet.create({
   screen: {
@@ -121,6 +134,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
+
   },
   gridStyle: {
     margin: 10,
@@ -144,7 +158,7 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 5,
   },
-  text: { fontSize: 15 },
+  text: { fontSize: 15, fontFamily: "roboto" },
   inputContainer: {
     flex: 1,
     flexDirection: "row",
