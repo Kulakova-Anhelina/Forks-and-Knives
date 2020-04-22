@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
-import { Button, Card, Icon } from "react-native-elements";
+import {  Card} from "react-native-elements";
 
 const CategoryRecipeScreen = (props) => {
   const catId = props.navigation.getParam("categoryId");
@@ -43,23 +43,18 @@ const CategoryRecipeScreen = (props) => {
               <Text numberOfLines={2} style={styles.title}>
                 {item.strMeal}
               </Text>
-              <View style={styles.mealRow}>
-                <Text>{item.strArea}</Text>
-              </View>
-              <View style={styles.mealRow}>
-                <Text>{item.strCategory}</Text>
+              <View style={styles.row}>
+                <View style={styles.mealRow}>
+                  <Text>{item.strArea.toUpperCase()}</Text>
+                </View>
+                <View style={styles.mealRow}>
+                  <Text>{item.strCategory.toUpperCase()}</Text>
+                </View>
+                <View style={styles.mealRow}>
+                  <Text>{item.strTags === null ? item.strCategory.toUpperCase() : item.strTags.toUpperCase()  }</Text>
+                </View>
               </View>
             </View>
-            <Button
-              icon={<Icon name="code" color="#ffffff" />}
-              buttonStyle={{
-                borderRadius: 0,
-                marginLeft: 0,
-                marginRight: 0,
-                marginBottom: 0,
-              }}
-              title="VIEW NOW"
-            />
           </View>
         </TouchableOpacity>
       </Card>
@@ -68,15 +63,12 @@ const CategoryRecipeScreen = (props) => {
 
   return (
     <ScrollView>
-      <View style={styles.screen}>
-        <Text style={styles.title}>LEARN TO COOK</Text>
         <FlatList
           data={meal}
           renderItem={renderItem}
           keyExtractor={(item) => item.idMeal}
           numColumns={1}
         />
-      </View>
     </ScrollView>
   );
 };
@@ -91,32 +83,33 @@ CategoryRecipeScreen.navigationOptions = (data) => {
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-  },
-  container: {
-    flex: 1,
+   container: {
     borderRadius: 10,
-    alignContent: "center",
-    justifyContent: "center",
-    alignItems: "center",
   },
   title: {
     fontFamily: "roboto-bold",
     fontSize: 18,
-    padding: 10,
+    paddingVertical: 10,
     marginBottom: 10,
   },
-  text: { fontSize: 14, marginBottom: 10 },
+  text: { 
+    fontSize: 14, 
+    marginBottom: 3 },
+
   cardImage: {
     resizeMode: "cover",
     width: 300,
     height: 100,
+    alignSelf: "center"
   },
-
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  
+  },
+  mealRow: {
+    
+  }
  
 });
 export default CategoryRecipeScreen;

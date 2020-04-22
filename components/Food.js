@@ -18,7 +18,16 @@ const Food = (props) => {
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity style={styles.gridStyle}>
+      <TouchableOpacity 
+       onPress={() => {
+          props.navigation.navigate({
+            routeName: "Recipe",
+            //use data in new screen
+            params: { recipeId: item.strMeal },
+          });
+        }}
+      
+      style={styles.gridStyle}>
         <View style={styles.container}>
           <View>
             <Image
@@ -46,6 +55,7 @@ const Food = (props) => {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         pagingEnabled={true}
+       
       />
     </View>
   );

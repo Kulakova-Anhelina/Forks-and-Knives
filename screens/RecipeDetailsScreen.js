@@ -2,6 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import { View, Text, StyleSheet, Button, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { WebView } from "react-native-webview";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { Ionicons } from "@expo/vector-icons";
+import HeaderButton from "../components/HeaderButton";
 
 const RecipeDetailsScreen = (props) => {
   const reId = props.navigation.getParam("recipeId");
@@ -40,10 +43,10 @@ const RecipeDetailsScreen = (props) => {
         <Text>{dish.instructions}</Text>
         <View style={{ flex: 1 }}>
           <WebView
-            style={{ marginTop: 20 , width: 350,height: 200}}
+            style={{ marginTop: 20, width: 350, height: 200 }}
             source={{ uri: dish.video }}
-          
-         
+            originWhitelist={['*']}
+
           />
         </View>
         <Button
@@ -64,6 +67,17 @@ RecipeDetailsScreen.navigationOptions = (data) => {
   const reId = data.navigation.getParam("recipeId");
   return {
     headerTitle: reId,
+    headerRight: (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Favourite"
+          iconName="ios-star"
+          onPress={() => {
+            console.log("My fav");
+          }}
+        />
+      </HeaderButtons>
+    ),
   };
 };
 const styles = StyleSheet.create({
