@@ -1,0 +1,23 @@
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDEEkkRIPSy0GF48otTuNK2xflv0HrxyX0",
+    authDomain: "recipeanhelina.firebaseapp.com",
+    databaseURL: "https://recipeanhelina.firebaseio.com",
+    projectId: "recipeanhelina",
+    storageBucket: "recipeanhelina.appspot.com",
+    messagingSenderId: "994088357953",
+    appId: "1:994088357953:web:02556a26caeb63d1c0f6c0",
+    measurementId: "G-0FCEKT2V92"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>

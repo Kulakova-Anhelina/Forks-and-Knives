@@ -6,6 +6,20 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { Ionicons } from "@expo/vector-icons";
 import HeaderButton from "../components/HeaderButton";
 import Colors from "../constants/Colors";
+import * as firebase from "firebase";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBjvrhK0d_KRfWr6NLN8BcDwTuavcDXbvQ",
+  authDomain: "knivescooking.firebaseapp.com",
+  databaseURL: "https://knivescooking.firebaseio.com",
+  projectId: "knivescooking",
+  storageBucket: "knivescooking.appspot.com",
+  messagingSenderId: "237143204809",
+  appId: "1:237143204809:web:8be56503de1049914d3e18",
+  measurementId: "G-MFFBYS9HRE",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 const RecipeDetailsScreen = (props) => {
   const reId = props.navigation.getParam("recipeId");
@@ -31,6 +45,31 @@ const RecipeDetailsScreen = (props) => {
       .catch((error) => console.log(error));
   }, []);
 
+  const saveItem = () => {
+    firebase.database().ref("items/").push({ title: dish.title });
+  };
+
+  //dynamic function to render the title of the page
+  RecipeDetailsScreen.navigationOptions = (data) => {
+    console.log(data);
+
+    const reId = data.navigation.getParam("recipeId");
+    return {
+      headerTitle: reId,
+      headerRight: (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <Item
+            title="Favourite"
+            iconName="ios-heart"
+            onPress={(item) => {
+              saveItem(item);
+            }}
+          />
+        </HeaderButtons>
+      ),
+    };
+  };
+
   return (
     <ScrollView>
       <View style={styles.screen}>
@@ -52,25 +91,6 @@ const RecipeDetailsScreen = (props) => {
   );
 };
 
-//dynamic function to render the title of the page
-RecipeDetailsScreen.navigationOptions = (data) => {
-  console.log(data);
-  const reId = data.navigation.getParam("recipeId");
-  return {
-    headerTitle: reId,
-    headerRight: (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item
-          title="Favourite"
-          iconName="ios-star"
-          onPress={() => {
-            console.log("My fav");
-          }}
-        />
-      </HeaderButtons>
-    ),
-  };
-};
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
