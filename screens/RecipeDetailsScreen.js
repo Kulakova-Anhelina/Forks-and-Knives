@@ -19,7 +19,9 @@ const firebaseConfig = {
   measurementId: "G-MFFBYS9HRE",
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
 
 const RecipeDetailsScreen = (props) => {
   const reId = props.navigation.getParam("recipeId");
