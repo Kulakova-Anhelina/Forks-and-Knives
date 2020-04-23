@@ -4,9 +4,18 @@ import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import RecipeNavigation from "./navigation/RecipeNavigation";
 import {enableScreens} from 'react-native-screens';
+import {createStore, combineReducers} from 'redux';
+import {Provider} from 'react-redux'
+
+import  recipeReducer from './store/reducers/recipe'
 
 // for better perfomence, difference is not visible
 enableScreens()
+
+const rootReducer = combineReducers ({
+  recipe: recipeReducer
+})
+const store = createStore(rootReducer);
 
 const customFonts = () => {
   Font.loadAsync({
@@ -26,14 +35,10 @@ export default function App() {
     );
   }
 
-  return <RecipeNavigation />;
+  return <Provider
+   store = {store}>
+   <RecipeNavigation />
+   </Provider>;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+

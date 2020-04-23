@@ -12,4 +12,4 @@ const recipeReducer = (state = initialState, action) => {
   return state;
 };
 
-export default function recipeReducer()
+export default recipeReducer
