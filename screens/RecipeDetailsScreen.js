@@ -7,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import HeaderButton from "../components/HeaderButton";
 import Colors from "../constants/Colors";
 import * as firebase from "firebase";
+import { Rating, AirbnbRating } from "react-native-elements";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBjvrhK0d_KRfWr6NLN8BcDwTuavcDXbvQ",
@@ -20,7 +21,7 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 if (!firebase.apps.length) {
-  firebase.initializeApp(config);
+  firebase.initializeApp(firebaseConfig);
 }
 
 const RecipeDetailsScreen = (props) => {

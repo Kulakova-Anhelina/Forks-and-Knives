@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
+import { ListItem } from "react-native-elements";
+import { Ionicons } from "@expo/vector-icons";
+import { Button } from 'react-native-elements';
 import * as firebase from "firebase";
-
-
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBjvrhK0d_KRfWr6NLN8BcDwTuavcDXbvQ",
@@ -18,48 +20,52 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 
- if (!firebase.apps.length) {
-  firebase.initializeApp(config);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
 }
 
-const FavoriteRecipeScreen = (props) => {
 
+      // Get a key for a new Post.
+
+
+const FavoriteRecipeScreen = (props) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    firebase.database().ref("items/").on("value", (snapshot) => {
+    firebase
+      .database()
+      .ref("items/")
+      .on("value", (snapshot) => {
         const data = snapshot.val();
         const prods = Object.values(data);
         setItems(prods);
       });
   }, []);
 
-  const listSeparator = () => {
-    return (
-      <View
-        style={{
-          height: 5,
-          width: "80%",
-          backgroundColor: "#fff",
-          marginLeft: "10%",
-        }}
-      />
-    );
+  const deleteData = () => {
+
+    firebase.database().ref(`items/${id}`).remove();
   };
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity>
+    <ListItem
+      title={item.title}
+      bottomDivider
+      rightIcon={<Ionicons name="ios-close" size={25} />}
+      onPress = {(id) => deleteData(id)}
+
+    />
+    </TouchableOpacity>
+  );
 
   return (
     <View style={styles.screen}>
-      <Text style={{ marginTop: 30, fontSize: 20 }}>My favorite recipes</Text>
+      <Text style={styles.title}>My favorite recipes</Text>
       <FlatList
-        style={{ marginLeft: "5%" }}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.listcontainer}>
-            <Text style={{ fontSize: 18 }}>{item.title}</Text>
-          </View>
-        )}
+        renderItem={renderItem}
         data={items}
-        ItemSeparatorComponent={listSeparator}
       />
     </View>
   );
@@ -68,6 +74,12 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: "center",
+  },
+  title: {
+    fontFamily: "roboto-bold",
+    fontSize: 18,
+    padding: 10,
+    margin: 5,
   },
 });
 
