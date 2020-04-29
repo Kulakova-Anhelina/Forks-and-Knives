@@ -4,7 +4,7 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 import { ListItem } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
-import { Button } from 'react-native-elements';
+import { Button } from "react-native-elements";
 import * as firebase from "firebase";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
@@ -24,9 +24,7 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-
-      // Get a key for a new Post.
-
+// Get a key for a new Post.
 
 const FavoriteRecipeScreen = (props) => {
   const [items, setItems] = useState([]);
@@ -43,19 +41,25 @@ const FavoriteRecipeScreen = (props) => {
   }, []);
 
   const deleteData = () => {
-
     firebase.database().ref(`items/${id}`).remove();
   };
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity>
-    <ListItem
-      title={item.title}
-      bottomDivider
-      rightIcon={<Ionicons name="ios-close" size={25} />}
-      onPress = {(id) => deleteData(id)}
-
-    />
+    <TouchableOpacity
+      onPress={() =>
+        props.navigation.navigate({
+          routeName: "Recipe",
+          //use data in new screen
+          params: { recipeId: item.title},
+        })
+      }
+    >
+      <ListItem
+        title={item.title}
+        bottomDivider
+        rightIcon={<Ionicons name="ios-close" size={25} />}
+        onPress={(id) => deleteData(id)}
+      />
     </TouchableOpacity>
   );
 
