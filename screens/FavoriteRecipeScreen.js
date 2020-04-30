@@ -7,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Button } from "react-native-elements";
 import * as firebase from "firebase";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBjvrhK0d_KRfWr6NLN8BcDwTuavcDXbvQ",
@@ -36,31 +37,50 @@ const FavoriteRecipeScreen = (props) => {
       .on("value", (snapshot) => {
         const data = snapshot.val();
         const prods = Object.values(data);
+
         setItems(prods);
       });
   }, []);
 
   const deleteData = () => {
-    firebase.database().ref(`items/${id}`).remove();
+  firebase
+      .database()
+      .ref("items/")
+      .once("value")
+      .then((snapshot) => {
+        snapshot.forEach((item) => {
+         console.log(item.key)
+        });
+      });
+
+   
   };
 
+
+
   const renderItem = ({ item }) => (
-    <TouchableOpacity
-      onPress={() =>
-        props.navigation.navigate({
-          routeName: "Recipe",
-          //use data in new screen
-          params: { recipeId: item.title},
-        })
-      }
-    >
-      <ListItem
-        title={item.title}
-        bottomDivider
-        rightIcon={<Ionicons name="ios-close" size={25} />}
-        onPress={(id) => deleteData(id)}
+    <View>
+      <TouchableOpacity
+        onPress={() =>
+          props.navigation.navigate({
+            routeName: "Recipe",
+            //use data in new screen
+            params: { recipeId: item.title },
+          })
+        }
+      >
+        <ListItem
+          title={item.title}
+          bottomDivider
+          chevron={{ color: "grey" }}
+        />
+      </TouchableOpacity>
+      <Button
+        type="clear"
+        icon={<Icon name="trash" size={20} color="grey" />}
+        onPress={(id) =>deleteData(id)}
       />
-    </TouchableOpacity>
+    </View>
   );
 
   return (
@@ -77,13 +97,18 @@ const FavoriteRecipeScreen = (props) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: "center",
   },
   title: {
     fontFamily: "roboto-bold",
     fontSize: 18,
     padding: 10,
     margin: 5,
+  },
+  listStyle: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    paddingLeft: 10,
+    paddingTop: 5,
   },
 });
 
