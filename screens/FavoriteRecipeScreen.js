@@ -42,14 +42,18 @@ const FavoriteRecipeScreen = (props) => {
       });
   }, []);
 
-  const deleteData = () => {
+  const deleteData = (id) => {
   firebase
       .database()
       .ref("items/")
       .once("value")
       .then((snapshot) => {
         snapshot.forEach((item) => {
-         console.log(item.key)
+    
+         if (item.key == item.key){
+          console.log(item.key)
+
+         }
         });
       });
 

@@ -8,6 +8,7 @@ import HeaderButton from "../components/HeaderButton";
 import Colors from "../constants/Colors";
 import * as firebase from "firebase";
 import { Rating, AirbnbRating } from "react-native-elements";
+import { Card } from 'react-native-elements';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBjvrhK0d_KRfWr6NLN8BcDwTuavcDXbvQ",
@@ -33,6 +34,11 @@ const RecipeDetailsScreen = (props) => {
     video: "",
     picture: "",
   });
+
+  const ratingCompleted = (rating) => {
+    console.log("Rating is: " + rating);
+    firebase.database().ref("raiting/").push({ title: dish.title, rating: rating });
+  };
 
   useEffect(() => {
     fetch(url)
@@ -89,6 +95,19 @@ const RecipeDetailsScreen = (props) => {
             originWhitelist={["*"]}
           />
         </View>
+        <Card title="How do you like it?" containerStyle={styles.card}>
+            <AirbnbRating 
+                starContainerStyle={{
+                    alignSelf: "center",
+                    backgroundColor: "white"
+                }} 
+             
+                showRating 
+                count={5}
+                defaultRating={null}
+                onFinishRating={ratingCompleted}
+            />
+          </Card>
       </View>
     </ScrollView>
   );
@@ -100,6 +119,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
+    backgroundColor: 'white'
   },
   text: {
     fontFamily: "roboto",
@@ -131,6 +151,10 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: Colors.primaryColor,
     borderRadius: 10,
+  },
+  card: {
+    width: '85%', 
+    marginBottom: 20
   },
 });
 export default RecipeDetailsScreen;

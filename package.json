@@ -12,6 +12,7 @@
     "expo": "~37.0.3",
     "expo-av": "~8.1.0",
     "expo-font": "~8.1.0",
+    "expo-store-review": "^2.1.0",
     "firebase": "^7.14.1",
     "material-design-icons": "^3.0.1",
     "react": "~16.9.0",
