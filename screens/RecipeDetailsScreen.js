@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
 
   view: {
     width: 400,
-    height: 200,
+    height: 180,
   },
 
   bgImage: {
