@@ -10,7 +10,7 @@ return (
     {...props} 
     IconComponent = {Ionicons}
       iconSize = {23}
-      color = {Colors.buttonColor}
+      color = {Colors.mainColor}
     />)
 }; 
 

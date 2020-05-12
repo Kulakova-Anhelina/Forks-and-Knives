@@ -14,7 +14,6 @@ import Colors from "../constants/Colors";
 import { Button } from "react-native-elements";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
-import { Ionicons } from "@expo/vector-icons";
 
 const CategoriesScreen = (props) => {
   console.log(props);
@@ -81,8 +80,8 @@ const CategoriesScreen = (props) => {
           <Button
             title="GO"
             type="outline"
-            buttonStyle={{ borderColor: Colors.buttonColor }}
-            titleStyle={{ color: Colors.buttonColor }}
+            buttonStyle={{ borderColor: Colors.mainColor }}
+            titleStyle={{ color: Colors.mainColor }}
             onPress={() =>
               props.navigation.navigate({
                 routeName: "CategoryRecipe",

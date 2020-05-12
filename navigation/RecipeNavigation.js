@@ -15,7 +15,7 @@ import FiltersScreen from "../screens/FiltersScreen";
 
 
 const defaultStackNavOptions =  {
-  headerTintColor: Colors.buttonColor,
+  headerTintColor: Colors.mainColor,
   headerTitleStyle: {
     fontFamily: 'roboto-bold'
   },
@@ -93,7 +93,7 @@ const MealsFavTab = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: Colors.buttonColor,
+      activeTintColor: Colors.mainColor,
     },
     tablabelStyle:{
       fontFamily: 'roboto-bold'
@@ -129,7 +129,7 @@ const MainNav = createDrawerNavigator({
  
 },
 {contentOptions: {
-  activeTintColor: Colors.buttonColor,
+  activeTintColor: Colors.mainColor,
   labelStyle :{
     fontFamily: 'roboto-bold'
   }

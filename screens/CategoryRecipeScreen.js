@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import {  Card} from "react-native-elements";
+import { Divider } from 'react-native-elements';
+import Colors from "../constants/Colors";
+import { color } from "react-native-reanimated";
 
 const CategoryRecipeScreen = (props) => {
   const catId = props.navigation.getParam("categoryId");
@@ -43,6 +46,7 @@ const CategoryRecipeScreen = (props) => {
               <Text numberOfLines={2} style={styles.title}>
                 {item.strMeal}
               </Text>
+              <Divider style={{ backgroundColor: Colors.accentColor, margin: 5}} />
               <View style={styles.row}>
                 <View style={styles.mealRow}>
                   <Text style = {styles.text}>{item.strArea.toUpperCase()}</Text>
@@ -111,7 +115,8 @@ const styles = StyleSheet.create({
     
   },
   text :{
-    fontFamily: 'roboto'
+    fontFamily: 'roboto',
+    color: Colors.backColorColor,
   }
  
 });

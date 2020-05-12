@@ -1,8 +1,7 @@
 export default {
     primaryColor:'#FAFAFA',
-    accentColor: 'yellow',
-    buttonColor: '#DB5461',
-    exColor: '#8AA29E',
+    accentColor: "#B2BABB",
+    mainColor: '#DB5461',
     backColor: '#E0DDCF'
 
 }

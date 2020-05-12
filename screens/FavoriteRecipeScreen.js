@@ -3,11 +3,11 @@ import { View, Text, StyleSheet, FlatList } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 import { ListItem } from "react-native-elements";
-import { Ionicons } from "@expo/vector-icons";
 import { Button } from "react-native-elements";
 import * as firebase from "firebase";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
+import Colors from "../constants/Colors";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBjvrhK0d_KRfWr6NLN8BcDwTuavcDXbvQ",
@@ -72,8 +72,9 @@ const FavoriteRecipeScreen = (props) => {
         />
       </TouchableOpacity>
       <Button
-        type="clear"
-        icon={<Icon name="trash" size={20} color="grey" />}
+        type="solid"
+        buttonStyle = {{backgroundColor: Colors.accentColor , marginBottom: 10, size: ""}}
+        icon={<Icon name="trash" size={20} color="white" />}
         onPress={(item) => deleteData(item)}
       />
     </View>

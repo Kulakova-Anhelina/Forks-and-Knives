@@ -33,7 +33,7 @@ const FiltersScreen = (props) => {
           thumbColor={Colors.exColor}
           onValueChange={props.onChange}
           //set the switch color when it is true
-          trackColor={{ true: Colors.buttonColor }}
+          trackColor={{ true: Colors.mainColor }}
         ></Switch>
       </View>
     );
