@@ -3,11 +3,10 @@ import { View, Text, StyleSheet, Button, ImageBackground } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { WebView } from "react-native-webview";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import { Ionicons } from "@expo/vector-icons";
 import HeaderButton from "../components/HeaderButton";
 import Colors from "../constants/Colors";
 import * as firebase from "firebase";
-import { Rating, AirbnbRating } from "react-native-elements";
+import { AirbnbRating } from "react-native-elements";
 import { Card } from 'react-native-elements';
 
 const firebaseConfig = {
@@ -93,6 +92,9 @@ const RecipeDetailsScreen = (props) => {
             style={styles.view}
             source={{ uri: dish.video }}
             originWhitelist={["*"]}
+            scrollEnabled= {false}
+            mediaPlaybackRequiresUserAction = {true}
+         
           />
         </View>
         <Card title="How do you like it?" containerStyle={styles.card}>
