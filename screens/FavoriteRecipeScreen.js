@@ -42,25 +42,17 @@ const FavoriteRecipeScreen = (props) => {
       });
   }, []);
 
-  const deleteData = (id) => {
-  firebase
+  const deleteData = (props) => {
+    firebase
       .database()
       .ref("items/")
       .once("value")
       .then((snapshot) => {
         snapshot.forEach((item) => {
-    
-         if (item.key == item.key){
-          console.log(item.key)
-
-         }
+          return firebase.database().ref("items").child(item.key).remove();
         });
       });
-
-   
   };
-
-
 
   const renderItem = ({ item }) => (
     <View>
@@ -82,11 +74,10 @@ const FavoriteRecipeScreen = (props) => {
       <Button
         type="clear"
         icon={<Icon name="trash" size={20} color="grey" />}
-        onPress={(id) =>deleteData(id)}
+        onPress={(item) => deleteData(item)}
       />
     </View>
   );
-
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>My favorite recipes</Text>
